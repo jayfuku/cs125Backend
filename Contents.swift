@@ -1,4 +1,4 @@
 import UIKit
+import run
+run.run();
 
-var greeting = "Hello, playground"
-print(greeting)

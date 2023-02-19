@@ -1,9 +1,10 @@
 import Foundation
 
 class UserSleepDataRetriever {
+    //An instance of this gets created every day
+    
     private var currentDay: Date;
     private var HKStore: Int //Needs to be changed of HKHealthstore type once in actual app
-    public typealias data = (Date, Bool);
     
     init(HKStore:Int){
         self.currentDay = Date.now;
@@ -21,16 +22,19 @@ class UserSleepDataRetriever {
         //Create query to get sleep data of most recent sleep
     }
     
-    public func retrieveData() -> Array<data>{
+    public func retrieveData() -> SleepData{
         //Get data from Apple health data
         assert(self.checkPermissions(), "App does not have permission to access health data")
         
         // Create query based on current day
+        var query = self.createQuery()
         
-        //Return an array of <data> type where  data[0] is the hour and data[1] indicates if the user was in bed or not
-        return [(self.currentDay, true)] //PLACEHOLDER
+        // Use query to retrieve the users most recent sleep
+        // Should retrieve whole night of sleep
         
         
+        //Return a Sleepdata for the current day
+        return SleepData(Time: 1, slept: Date.now, woke: Date.now) //PLACEHOLDER
     }
     
     
